@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
+        // Read-only since 2021; kept only as a fallback for old AGP 3.2 transitive dependencies.
         jcenter()
     }
     dependencies {

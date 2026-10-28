@@ -1,0 +1,83 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write # attach the APK to releases on v* tags
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # tags for the APK file name
+
+      # The runner's sdkmanager needs Java 17; the project itself (AGP 3.2.1, Gradle 4.6) needs Java 8.
+      - name: Set up JDK 17 for sdkmanager
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Android SDK packages
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-26" "build-tools;28.0.3"
+
+      - name: Set up JDK 8 for the build
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/*.gradle', 'gradle/wrapper/gradle-wrapper.properties') }}
+
+      # Optional: the same debug keystore as local builds, so CI APKs install over them without uninstalling.
+      # Secret DEBUG_KEYSTORE_BASE64 = base64 of ~/.android/debug.keystore.
+      - name: Restore debug keystore
+        env:
+          DEBUG_KEYSTORE_BASE64: ${{ secrets.DEBUG_KEYSTORE_BASE64 }}
+        if: env.DEBUG_KEYSTORE_BASE64 != ''
+        run: |
+          mkdir -p ~/.android
+          echo "$DEBUG_KEYSTORE_BASE64" | base64 -d > ~/.android/debug.keystore
+
+      - name: Build
+        env:
+          # Read by app/build.gradle (nday.guestToken / nday.tvCodeToken), see README.
+          NDAY_GUESTTOKEN: ${{ secrets.NDAY_GUESTTOKEN }}
+          NDAY_TVCODETOKEN: ${{ secrets.NDAY_TVCODETOKEN }}
+        run: |
+          if [ -z "$NDAY_GUESTTOKEN" ] || [ -z "$NDAY_TVCODETOKEN" ]; then
+            echo "::warning::NDAY_GUESTTOKEN / NDAY_TVCODETOKEN secrets are not set; guest mode and TV-code login will not work in this APK."
+          fi
+          ./gradlew assembleDebug --console=plain
+          VERSION=$(git describe --tags --always)
+          cp app/build/outputs/apk/debug/app-debug.apk "NdayPlayer-$VERSION.apk"
+          echo "APK=NdayPlayer-$VERSION.apk" >> "$GITHUB_ENV"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: NdayPlayer-apk
+          path: ${{ env.APK }}
+
+      - name: Attach APK to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
+          gh release upload "$GITHUB_REF_NAME" "$APK" --clobber

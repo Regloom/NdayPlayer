@@ -41,3 +41,15 @@ nday.tvCodeToken=...
 ./gradlew assembleDebug
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
+
+## CI
+
+GitHub Actions (`.github/workflows/build.yml`) собирает APK на каждый push и pull request; файл лежит в артефактах
+запуска. При пуше тега `v*` (например `git tag v1.1 && git push origin v1.1`) APK прикрепляется к релизу.
+
+Секреты репозитория (Settings → Secrets and variables → Actions):
+
+| Секрет | Зачем |
+|---|---|
+| `NDAY_GUESTTOKEN`, `NDAY_TVCODETOKEN` | токены API, как в `local.properties`; без них APK соберётся, но гостевой режим и вход по коду не будут работать |
+| `DEBUG_KEYSTORE_BASE64` | необязательно: `base64 -w0 ~/.android/debug.keystore`, чтобы APK из CI ставился поверх локальных сборок |
