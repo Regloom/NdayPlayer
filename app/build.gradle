@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+// nday.club API tokens are not stored in the repository; put them into local.properties (see README).
+def localProps = new Properties()
+def localFile = rootProject.file('local.properties')
+if (localFile.exists()) localFile.withInputStream { localProps.load(it) }
+def ndayProp = { String key -> (localProps.getProperty(key) ?: System.getenv(key.toUpperCase().replace('.', '_')) ?: '') }
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId 'com.nday.player'
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName '1.0'
+        buildConfigField 'String', 'NDAY_GUEST_TOKEN', '"' + ndayProp('nday.guestToken') + '"'
+        buildConfigField 'String', 'NDAY_TV_CODE_TOKEN', '"' + ndayProp('nday.tvCodeToken') + '"'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ''
+        }
+        release {
+            minifyEnabled false
+            // Signed with the debug key so the APK installs without extra setup.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.13.3'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.13.3'
+    implementation 'com.google.zxing:core:3.3.3'
+}

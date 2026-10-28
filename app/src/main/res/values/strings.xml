@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NDAY Player</string>
+    <string name="all_videos">Все видео</string>
+    <string name="collections">Подборки</string>
+    <string name="collection_title">Подборка: %1$s</string>
+    <string name="videos_count">Видео: %1$s</string>
+    <string name="history">История</string>
+    <string name="history_title">Вы смотрели   ·   ☰ или долгое нажатие OK — скрыть</string>
+    <string name="history_empty">Вы ещё ничего не смотрели</string>
+    <string name="watched_at">смотрели %1$s</string>
+    <string name="years">Годы</string>
+    <string name="year_title">Видео %1$d года</string>
+    <string name="history_remove">Скрыть из истории</string>
+    <string name="history_clear">Скрыть всю историю</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_out">Выйти</string>
+    <string name="signed_in">Вы вошли в аккаунт</string>
+    <string name="profile">Профиль</string>
+    <string name="close">Закрыть</string>
+    <string name="paid_until">Взнос оплачен до %1$s</string>
+    <string name="not_paid">Взнос не оплачен</string>
+    <string name="speed">Скорость</string>
+    <string name="speed_button">Скорость %1$s</string>
+    <string name="speed_badge">%1$s</string>
+    <string name="empty">Здесь пока ничего нет</string>
+    <string name="error_connect">Не удалось подключиться к сайту nday.club. Нажмите OK, чтобы повторить.</string>
+
+    <string name="watch">Смотреть</string>
+    <string name="resume_from">Продолжить с %1$s</string>
+    <string name="restart">С начала</string>
+    <string name="like">Нравится</string>
+    <string name="liked">Понравилось</string>
+    <string name="prev">Предыдущее</string>
+    <string name="next">Следующее</string>
+    <string name="views">просмотров: %1$s</string>
+    <string name="likes">♥ %1$s</string>
+    <string name="free_video">открытое видео</string>
+    <string name="need_auth_free">Это открытое видео, просмотр доступен после авторизации. Нет аккаунта? Зарегистрироваться можно на сайте nday.club</string>
+    <string name="need_auth_paid">Просмотр этого видео доступен после авторизации и оплаты взносов. Зарегистрироваться и оплатить взносы можно на сайте nday.club</string>
+    <string name="need_payment">Просмотр этого видео доступен после оплаты взноса. Оплатить взносы можно в личном кабинете на сайте nday.club</string>
+
+    <string name="auth_title">Чтобы продолжить, войдите в аккаунт</string>
+    <string name="auth_scan">Отсканируйте QR-код телефоном</string>
+    <string name="auth_or">или</string>
+    <string name="auth_steps">Зайдите в свой профиль на сайте nday.club, нажмите «Привязать ТВ» и введите число:</string>
+    <string name="code_timer">Код действует ещё %1$s</string>
+    <string name="open_site">Открыть nday.club в браузере</string>
+    <string name="auth_scan_other">Или отсканируйте QR-код другим телефоном</string>
+    <string name="refresh">Обновить код</string>
+    <string name="auth_footer">Вопросы по работе приложения: info@nday.club</string>
+
+    <string name="player_hints_touch">Двойной тап слева/справа — перемотка 10 с</string>
+    <string name="player_hints">OK — пауза    ◀ ▶ — перемотка    ▲ ▼ — скорость    ☰ — выбор скорости</string>
+    <string name="retry_hint">Нажмите OK, чтобы повторить, или Назад для выхода</string>
+    <string name="error_no_stream">Для этого видео нет ссылки на поток</string>
+    <string name="error_drm_unsupported">Устройство не поддерживает защиту %1$s</string>
+    <string name="error_source">Ошибка загрузки видео</string>
+    <string name="error_renderer">Ошибка декодирования</string>
+    <string name="error_playback">Ошибка воспроизведения</string>
+</resources>

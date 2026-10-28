@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Phone portrait: single column. Same view ids as layout/activity_auth.xml. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/auth_title"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/auth_steps"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/auth_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:letterSpacing="0.2"
+            android:textColor="@color/accent"
+            android:textIsSelectable="true"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/auth_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/text_dim"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_open_site"
+            style="@style/TvButton"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="0dp"
+            android:text="@string/open_site"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_refresh"
+            style="@style/TvButton"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="0dp"
+            android:text="@string/refresh" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:text="@string/auth_scan_other"
+            android:textColor="@color/text_dim"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/auth_qr"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@string/auth_footer"
+            android:textColor="@color/text_dim"
+            android:textSize="13sp" />
+    </LinearLayout>
+</ScrollView>
