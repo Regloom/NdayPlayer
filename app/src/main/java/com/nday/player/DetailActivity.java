@@ -98,7 +98,10 @@ public class DetailActivity extends Activity {
                 // Before loading only "Войти" was visible and took focus; move it to playback.
                 if (firstLoad && btnPlay.getVisibility() == View.VISIBLE) btnPlay.requestFocus();
             } else if (error != null) {
-                status.setText(getString(R.string.error_connect) + "\n" + error.getMessage());
+                boolean serverError = error instanceof Api.HttpException && ((Api.HttpException) error).code >= 500;
+                status.setText(serverError
+                        ? getString(R.string.error_video_server, ((Api.HttpException) error).code)
+                        : getString(R.string.error_connect) + "\n" + error.getMessage());
                 status.setVisibility(View.VISIBLE);
             }
         });

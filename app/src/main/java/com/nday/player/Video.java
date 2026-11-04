@@ -61,6 +61,8 @@ public final class Video implements Serializable {
             }
         }
         String poster = str(o, "ks_poster");
+        // Some entries (e.g. streams) carry only the older "poster" field.
+        if (poster.isEmpty()) poster = str(o, "poster");
         if (!poster.isEmpty()) {
             v.pic = Api.STORAGE_MD + poster;
             v.picOrig = Api.STORAGE_ORIG + poster;

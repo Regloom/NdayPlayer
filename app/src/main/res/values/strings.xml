@@ -24,6 +24,7 @@
     <string name="speed_button">Скорость %1$s</string>
     <string name="speed_badge">%1$s</string>
     <string name="empty">Здесь пока ничего нет</string>
+    <string name="error_video_server">Сайт nday.club не отдал данные этого видео (ошибка сервера %1$d). Обычно так бывает с ещё не опубликованными видео и стримами — попробуйте позже.</string>
     <string name="error_connect">Не удалось подключиться к сайту nday.club. Нажмите OK, чтобы повторить.</string>
 
     <string name="watch">Смотреть</string>
